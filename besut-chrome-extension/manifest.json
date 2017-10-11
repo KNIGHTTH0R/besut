@@ -1,0 +1,33 @@
+{
+	"manifest_version" : 2,
+	
+	"name" : "Besut Blocker",
+	"version" : "0.1",
+	"description" : "Amankan Browsermu dari hoax",
+	
+	"icons" : {"128" : "logo.png"},
+	
+	"content_scripts": [
+    {
+		"matches": ["<all_urls>"],
+		"js": ["content.js"],
+		"run_at" : "document_start"
+    }],
+	
+	"background": {
+		"persistent": false,
+		"scripts": ["jquery.js","besut-core.js"]
+	},
+	
+	"browser_action" : {
+		"default_icon": "logo.png",
+		"default_popup" : "besut.html",
+		"default_title" : "besut blocker"
+	},
+	
+	"permissions" : [ 
+		"activeTab",
+		"tabs",
+		"storage"
+	]
+}
