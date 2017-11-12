@@ -4,14 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="google-signin-client_id" content="540463499518-ns8njfhs138fvrg1blfagmgq6vpl2d7m.apps.googleusercontent.com">
-        <title>Besut :: Home Page</title>
+        <title>Besut</title>
+        <link rel="shortcut icon" href="<?=$baseurl?>assets/images/favicon.ico" />
         <!-- Bootstrap -->
         <link href="<?=$baseurl?>assets/css/bootstrap.min.css" rel="stylesheet">
         <script src="<?=$baseurl?>assets/scripts/jquery.js"></script>
+        <script src="<?=$baseurl?>assets/scripts/APIs/ajaxes.js"></script>
         <!-- Custom -->
         <link href="<?=$baseurl?>assets/css/custom.css" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-        <script src="<?=$baseurl?>assets/scripts/APIs/ajaxes.js"></script>
         <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
         <link rel="stylesheet" href="<?=$baseurl?>assets/font-awesome-4.0.3/css/font-awesome.min.css">
 
@@ -21,7 +22,9 @@
         <!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
         <link rel="stylesheet" type="text/css" href="<?=$baseurl?>assets/rs-plugin/css/settings.css" media="screen" />
         <script>
-        var baseurl = '<?=$baseurl?>';
+          var baseurl = '<?=$baseurl?>';
+        </script>
+        <script>
         function onLoad() {
               gapi.load('auth2', function() {
                 gapi.auth2.init();
@@ -89,7 +92,7 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <!-- <li role="presentation"><a role="menuitem" tabindex="-1" href="#">My Profile</a></li>
                                     <li role="presentation"><a role="menuitem" tabindex="-2" href="#">Inbox</a></li> -->
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" onclick="signOut();" >Log Out</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" id="logout-btn" >Log Out</a></li>
                                     <!-- <li role="presentation"><a role="menuitem" tabindex="-4" href="login">Create account</a></li> -->
                                 </ul>
                             </div>

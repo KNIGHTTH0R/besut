@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="shortcut icon" href="assets/images/favicon.ico" />
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
@@ -224,5 +225,6 @@
 <script src="assets/scripts/jquery.js"></script>
 <script src="assets/scripts/APIs/location.js"></script>
 <script src="assets/scripts/APIs/ajaxes.js"></script>
+<script src="https://connect.facebook.net/en_US/all.js"></script>
 <script src="assets/scripts/APIs/facebookAPI.js"></script>
 <script src="assets/scripts/APIs/googleAPI.js"></script>

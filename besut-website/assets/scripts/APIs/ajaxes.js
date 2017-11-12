@@ -31,7 +31,8 @@ function postUser(uid, uname, photo, uemail)
     },
     success:function(response)
     {
-      // alert(response);
+      if (response != '')
+        alert(response);
       if (response == "blocked")
         alert("You are Blocked from Good Area!");
       else if (response == "failed")
@@ -88,34 +89,6 @@ function postVote(report, up)
   });
 }
 
-function signOut()
-{
-  FB.getLoginStatus(function(response) {
-    if (response.status === 'connected') {
-      FB.logout(function(response) {
-        $.get("user/logout", function(data, status) {
-          setTimeout(function(){
-              location.reload();
-          }, 200);
-          // window.location = "http://158.140.171.145";
-        });
-      });
-    }
-  });
-  var auth2 = gapi.auth2.getAuthInstance();
-      auth2.signOut().then(function () {
-        $.get("user/logout", function(data, status){
-          auth2.disconnect();
-          setTimeout(function(){
-              location.reload();
-          }, 200);
-          // alert(data);
-          // alert(status);
-          // window.location = "http://158.140.171.145";
-        });
-  });
-}
-
 function checkGuide()
 {
   if ($('#title').val().length == 0) {
@@ -138,5 +111,32 @@ $(document).ready(function () {
       $('#web').hide(1000);
     else
       $('#web').show(1000);
+  });
+  $( "#logout-btn" ).click(function() {
+    FB.getLoginStatus(function(response) {
+      if (response.status === 'connected') {
+        FB.logout(function(response) {
+          $.get("user/logout", function(data, status) {
+            setTimeout(function(){
+                location.reload();
+            }, 200);
+            // window.location = "http://158.140.171.145";
+          });
+        });
+      }
+    });
+
+    var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+          $.get("user/logout", function(data, status){
+            auth2.disconnect();
+            setTimeout(function(){
+                location.reload();
+            }, 200);
+            // alert(data);
+            // alert(status);
+            // window.location = "http://158.140.171.145";
+          });
+        });
   });
 });

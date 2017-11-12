@@ -3,7 +3,7 @@ $( document ).ready(function() {
       navigator.geolocation.getCurrentPosition(setLocation);
 });
 
-var positionString = "";
+var positionString = "location";
 
 function setLocation(position)
 {

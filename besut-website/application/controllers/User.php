@@ -24,7 +24,7 @@ class User extends Handler_Core {
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
 
 		if ($this->form_validation->run() == FALSE)
-			echo "failed";
+			echo "failed form validation";
 		else
 		{
 			$status = $this->data_user->checkUserLogin($email, $id);
@@ -32,9 +32,9 @@ class User extends Handler_Core {
 				echo "blocked";
 			else if ($status == false)
 			{
-				$filename = md5($name . rand());
-				if(!@copy($image, "data/pictures/profile/" . $filename . ".jpg"))
-					echo "failed";
+				$filename = md5($name . rand()) . ".jpg";
+				if(!@copy($image, "data/pictures/profile/" . $filename))
+					echo "failed get photo";
 				else
 				{
 					$token = $this->data_user->setNewUser($name, $email, $id, $filename, $position);
@@ -48,7 +48,7 @@ class User extends Handler_Core {
 						$this->input->set_cookie($cookie);
 					}
 					else
-						echo "failed";
+						echo "failed creating new user";
 				}
 			}
 			else {
@@ -60,7 +60,6 @@ class User extends Handler_Core {
 				$this->input->set_cookie($cookie);
 
 				$filename = $this->data_user->getFoto($status);
-				echo $filename;
 				if ($filename) {
 					$cookie = array(
 						'name' => 'reg_photo',

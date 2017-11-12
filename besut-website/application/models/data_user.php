@@ -23,7 +23,7 @@ class Data_user extends CI_Model{
     'URATE' => 0,
     'REGISTRATION_DATE' => $date,
     'ACTIVE_STATUS' => true,
-		`NOTIFICATION` => true];
+		'NOTIFICATION' => true];
 		$this->db->insert('users', $data);
     if ($this->db->affected_rows() > 0)
       return $userkey;
