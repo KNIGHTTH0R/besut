@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta name="google-signin-client_id" content="540463499518-ns8njfhs138fvrg1blfagmgq6vpl2d7m.apps.googleusercontent.com">
 
     <link href="assets/superhome/css.css" rel="stylesheet" type="text/css">
@@ -129,6 +130,8 @@
                     <div class="pricing-subtitle">Block Website Hoax</div><!-- /.pricing-subtitle -->
                     <hr>
                     <div class="pricing-title">Chrome Extension Aplication</div>
+                    <div class="pricing-subtitle">Currently in Progress</div><!-- /.pricing-subtitle -->
+                    <br>
                     <a href="#" class="btn-primary">Download</a>
                     <!-- <hr>
                     <ul class="pricing-list">
@@ -223,4 +226,3 @@
 <script src="assets/scripts/APIs/ajaxes.js"></script>
 <script src="assets/scripts/APIs/facebookAPI.js"></script>
 <script src="assets/scripts/APIs/googleAPI.js"></script>
-<script src="https://apis.google.com/js/platform.js" async defer></script>

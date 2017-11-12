@@ -55,7 +55,7 @@ class User extends Handler_Core {
 				$cookie = array(
 					'name' => 'reg_userKeys',
 					'value' => $status,
-					'expire' => '3600'
+					'expire' => '36000'
 				);
 				$this->input->set_cookie($cookie);
 
@@ -65,7 +65,7 @@ class User extends Handler_Core {
 					$cookie = array(
 						'name' => 'reg_photo',
 						'value' => $filename,
-						'expire' => '3600'
+						'expire' => '36000'
 					);
 					$this->input->set_cookie($cookie);
 				}
@@ -77,5 +77,6 @@ class User extends Handler_Core {
 	{
 		echo "Delete";
 		delete_cookie('reg_userKeys');
+		$this->session->unset_userdata('regUserID');
 	}
 }

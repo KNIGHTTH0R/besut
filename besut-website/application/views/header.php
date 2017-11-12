@@ -21,7 +21,7 @@
         <!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
         <link rel="stylesheet" type="text/css" href="<?=$baseurl?>assets/rs-plugin/css/settings.css" media="screen" />
         <script>
-        
+        var baseurl = '<?=$baseurl?>';
         function onLoad() {
               gapi.load('auth2', function() {
                 gapi.auth2.init();
@@ -52,7 +52,7 @@
                                 <?php
                                   echo form_open('search', 'class="form"');
                                 ?>
-                                    <div class="pull-left txt"><input type="text" name="search" class="form-control" placeholder="Search"></div>
+                                    <div class="pull-left txt"><input type="text" name="search" class="form-control" placeholder="Search" <?php if (isset($search)) echo "value='".$search."'"?>></div>
                                     <div class="pull-right">
                                       <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
                                     </div>
@@ -67,14 +67,29 @@
                                 </form>
                             </div>
 
-                            <div class="env pull-left"><i class="fa fa-envelope"></i></div>
+                            <div class="env pull-left dropdown">
+                              <i data-toggle="dropdown" class="fa fa-envelope"></i>
+                              <div class="status"><?=count($notif)?></div>
+                              <ul class="dropdown-menu" role="menu">
+                                <?php
+                                  $i = -1;
+                                  foreach ($notif as $value) {
+                                    echo '<li role="presentation"';
+                                    if ($i == -1)
+                                      echo ' style="border-top: none;"';
+                                    echo '><a onclick="return markNotif('.$value->IDNOTIF.');" role="menuitem" tabindex="'.$i.'" href="' . $baseurl . 'report/view/' . $value->IDREPORT . '/' . $value->IDCOMMENT. '">Date: ' . $value->DATE_TIME . '<br>' . $value->NOTIF . '</a></li>';
+                                    $i--;
+                                  }
+                                ?>
+                              </ul>
+                            </div>
 
                             <div class="avatar pull-left dropdown">
                                 <a data-toggle="dropdown" href="#"><img src="<?=$baseurl?>data/pictures/profile/<?=$photo?>" alt="" /></a> <b class="caret"></b>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">My Profile</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-2" href="#">Inbox</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-3" href="#" onclick="signOut()" >Log Out</a></li>
+                                    <!-- <li role="presentation"><a role="menuitem" tabindex="-1" href="#">My Profile</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-2" href="#">Inbox</a></li> -->
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" onclick="signOut();" >Log Out</a></li>
                                     <!-- <li role="presentation"><a role="menuitem" tabindex="-4" href="login">Create account</a></li> -->
                                 </ul>
                             </div>

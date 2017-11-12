@@ -7,11 +7,32 @@ class Data_report extends CI_Model{
 		$this->load->database();
 	}
 
+	function markNotif($id) {
+		$this->db->query("UPDATE `notif_target` SET `READED` = TRUE WHERE `IDNOTIF` = $id");
+	}
+
+	function getNotif($userid) {
+		$query = $this->db->query("SELECT n.`IDREPORT`, CONCAT(u.`UNAME`, ' menulis sesuatu pada laporan \"', r.`TITLE`, '\"') as NOTIF, n.`IDCOMMENT`, n.`DATE_TIME`, t.`IDNOTIF`
+		FROM `users` u, `post_reports` r, `notifications` n, `notif_target` t
+		WHERE t.`IDUSER` = $userid AND t.`IDNOTIF` = n.`IDNOTIF` AND n.`IDUSER` = u.`IDUSER` AND r.`IDREPORT` = n.`IDREPORT` AND t.`READED` = false");
+    return $query->result();
+	}
+
+	function makeNotif($indexReport, $userid, $comment) {
+		$this->db->query("INSERT INTO notifications (IDREPORT, IDUSER, KODECOMMENT, DATE_TIME) VALUES ($indexReport, $userid, $comment, NOW())");
+		$idnotif = $this->db->insert_id();
+		$targets = "INSERT INTO `notif_target` (`IDUSER`, `IDNOTIF`, `READED`)
+		SELECT `IDUSER`, $idnotif, 0 FROM post_reports WHERE `IDREPORT` = $indexReport AND `IDUSER` != $userid
+		UNION
+		SELECT `IDUSER`, $idnotif, 0 FROM post_comments WHERE `IDREPORT` = $indexReport AND `IDUSER` != $userid";
+		$query = $this->db->query($targets);
+	}
+
   function newReport($iduser, $title, $link, $web, $desc, $pictures) {
-    $title = $this->db->escape($title);
-    $link = $this->db->escape($link);
-    $web = $this->db->escape($web);
-    $desc = $this->db->escape($desc);
+    // $title = $this->db->escape($title);
+    // $link = $this->db->escape($link);
+    // $web = $this->db->escape($web);
+    // $desc = $this->db->escape($desc);
 
     $date = date("Y-m-d H:i:s");
     $data = ['IDUSER' => $iduser,
@@ -21,7 +42,8 @@ class Data_report extends CI_Model{
     'RDESC' => $desc,
     'RPICTURES' => $pictures,
     'PDATE_TIME' => $date,
-    'BOT_ESTIMATION' => 0];
+    'BOT_ESTIMATION' => 0,
+		`VIEWABLE` => true];
 		$this->db->insert('post_reports', $data);
     if ($this->db->affected_rows() > 0) {
       return $this->db->insert_id();
@@ -37,6 +59,7 @@ class Data_report extends CI_Model{
           U.`PROFILE_PIC` as profile,
           R.`TITLE` as title,
           R.`LINK` as link,
+					R.`WEBCONTENT` as WEBCONTENT,
           R.`RDESC` as content,
           R.`RPICTURES` as pics,
           R.`PDATE_TIME` as dtm,
@@ -50,7 +73,7 @@ class Data_report extends CI_Model{
     return $query->row();
   }
 
-  function getReports($limit)
+  function getReports($search, $limit)
   {
     $limit = ($limit - 1) * 10;
     $query = $this->db->query("SELECT
@@ -65,20 +88,19 @@ class Data_report extends CI_Model{
           R.`COMMENTCOUNTER` as ctr,
           R.`CLOSED` as closed
           FROM `post_reports` R, `users` U
-          WHERE R.`IDUSER` = U.`IDUSER` LIMIT $limit, 10");
+          WHERE R.`IDUSER` = U.`IDUSER` AND `VIEWABLE` = true AND R.`TITLE` like '%$search%'
+					ORDER BY `PDATE_TIME` DESC LIMIT $limit, 10");
     return $query->result();
   }
 
-  function getPageIndex()
+  function getPageIndex($search)
   {
-		$query = $this->db->query("SELECT Floor(COUNT(*)/10)+1 AS PAGES FROM `post_reports`");
+		$query = $this->db->query("SELECT CEIL(COUNT(*)/10) AS PAGES FROM `post_reports` where `VIEWABLE` = true AND `TITLE` LIKE '%$search%'");
 		return $query->row()->PAGES;
 	}
 
-  function setVote($index, $column, $user)
+  function setVote($index, $column, $userid)
   {
-    $query = $this->db->query("SELECT IDUSER FROM USERS WHERE USERKEY = '$user'");
-    $userid = $query->row()->IDUSER;
     $query = $this->db->query("SELECT IDUSER FROM POST_REPORTS WHERE IDUSER = '$userid'");
     if ($this->db->affected_rows() > 0)
       return 'poster';
@@ -96,11 +118,9 @@ class Data_report extends CI_Model{
 		return $query->row()->Counter;
   }
 
-  function makeComment($report, $parent, $reply, $user)
+  function makeComment($report, $parent, $reply, $userid)
   {
-    $reply = $this->db->escape($reply);
-    $query = $this->db->query("SELECT IDUSER FROM USERS WHERE USERKEY = '$user'");
-    $userid = $query->row()->IDUSER;
+    // $reply = $this->db->escape($reply);
     $date = date("Y-m-d H:i:s");
     $data = ['IDUSER' => $userid,
     'IDREPORT' => $report,
@@ -110,6 +130,8 @@ class Data_report extends CI_Model{
 		$this->db->insert('post_comments', $data);
     if ($this->db->affected_rows() > 0) {
       $query = $this->db->query("UPDATE POST_REPORTS SET `COMMENTCOUNTER` = `COMMENTCOUNTER` + 1 WHERE IDREPORT = $report");
+
+			$this->makeNotif($report, $userid, $parent);
       return true;
     }
     return FALSE;
@@ -134,10 +156,8 @@ class Data_report extends CI_Model{
     return $query->result();
   }
 
-  function setCommentVote($index, $column, $user)
+  function setCommentVote($index, $column, $userid)
   {
-    $query = $this->db->query("SELECT IDUSER FROM USERS WHERE USERKEY = '$user'");
-    $userid = $query->row()->IDUSER;
     $query = $this->db->query("SELECT IDUSER FROM POST_COMMENTS WHERE IDUSER = '$userid'");
     if ($this->db->affected_rows() > 0)
       return 'poster';

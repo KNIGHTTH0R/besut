@@ -43,6 +43,7 @@ body {
 
 a {
     color: #363838;
+    cursor: pointer;
 }
 a:hover {
     color: #989c9e;
@@ -180,6 +181,38 @@ ul.socialicons li a:hover {
     color:#cfd5d7;
     line-height: 38px;
     padding: 0 20px;
+    margin-right: 15px;
+}
+
+.env i {
+  cursor: pointer;
+}
+
+.env .status {
+    position: absolute;
+    top: 0;
+    left: 35px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 20%;
+    padding: 0 5px;
+    color: white;
+    background-color: #80d3ab;
+    font-size: 12px;
+}
+
+.env .dropdown-menu {
+  width: 250px;
+}
+
+.env .dropdown-menu li {
+  border-top: solid 2px #f1f1f1;
+}
+
+.env .dropdown-menu li a {
+  font-size: 10pt;
+  white-space: pre-line;
+  word-wrap: break-word;
 }
 
 .avatar {
@@ -238,9 +271,9 @@ ul.socialicons li a:hover {
 }
 
 .paginationforum li a {
-    min-width: 24px;
+    min-width: 54px;
     height: 24px;
-    font-size: 14px;
+    font-size: 16px;
     font-family: 'Open Sans Semibold', sans-serif;
     color: #ffffff;
     background-color: #cfd5d7;
@@ -248,6 +281,7 @@ ul.socialicons li a:hover {
     display: block;
     padding: 0 8px;
     line-height: 24px;
+    text-align: center;
 }
 
 .paginationforum li a.active,
@@ -434,7 +468,7 @@ td.chbox {
 
 .post .userinfo {
     width: 15%;
-    padding: 20px 0 15px 15px;
+    padding: 20px 15px 15px 15px;
 }
 
 .post .posttext {
@@ -973,6 +1007,10 @@ a.down:hover {
     margin-bottom: 0;
 }
 
+.postinfo .bottom-info {
+  margin: 5px 0px;
+  border-bottom: solid 1px #f1f1f1;
+}
 
 /*-----------------------------------------------------------------*/
 /*--- Extra small devices (less 767px) ---*/
@@ -985,15 +1023,22 @@ a.down:hover {
     }
 
     .post .userinfo {
-        width: 30%;
+        width: 20%;
         padding: 15px 0 15px 15px;
     }
 
+    .paginationforum li {
+      margin-left: 10px;
+    }
+
+    .paginationforum li a {
+        min-width: 24px;
+    }
+
     .post .posttext {
-        width: 70%;
-        padding-right: 15px;
-        padding-top: 15px;
-        padding-bottom: 15px;
+        width: 80%;
+        padding: 15px;
+        padding-left: 15%;
     }
 
     .post .comments .commentbg {
@@ -1055,6 +1100,30 @@ a.down:hover {
         text-align: center;
     }
 
+    .post .wrap-ut {
+      width: auto;
+    }
+
+    .postinfo .comments {
+      border-bottom: none;
+      width: 20%;
+      padding: 0 0 25px 0;
+      margin: 0;
+      float: left;
+      border-bottom: none;
+    }
+
+    .postinfo .bottom-info {
+      width: 25%;
+      margin: 0 2px 0 2px;
+      float: left;
+      border-bottom: none;
+    }
+
+    .post .postinfo {
+      width: auto;
+    }
+
     /*--- 02_topic.html ---*/
 
     .postinfobot {
@@ -1076,7 +1145,7 @@ a.down:hover {
     }
 
     .textwraper textarea {
-        width: 175px;
+        width: 100%;
     }
 
     footer ul.socialicons {
@@ -1124,6 +1193,14 @@ a.down:hover {
     .post .userinfo {
         width: 15%;
         padding: 15px 0 15px 15px;
+    }
+
+    .paginationforum li {
+      margin-left: 20px;
+    }
+
+    .paginationforum li a {
+        min-width: 48px;
     }
 
     .post .posttext {
@@ -1190,6 +1267,14 @@ a.down:hover {
 @media (min-width: 992px) and (max-width: 1200px) {
     .container-fluid {
         padding: 0;
+    }
+
+    .paginationforum li {
+      margin-left: 15px;
+    }
+
+    .paginationforum li a {
+        min-width: 42px;
     }
 
     .headernav .search .txt {

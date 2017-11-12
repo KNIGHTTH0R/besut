@@ -1,3 +1,21 @@
+function markNotif(idnotif)
+{
+  $.ajax({
+    type:"post",
+    url: baseurl + "report/markNotif",
+    data:
+    {
+      id : idnotif
+    },
+    function(response)
+    {
+      setTimeout(function(){
+          return TRUE;
+      }, 200);
+    }
+  });
+}
+
 function postUser(uid, uname, photo, uemail)
 {
   $.ajax({
@@ -13,7 +31,7 @@ function postUser(uid, uname, photo, uemail)
     },
     success:function(response)
     {
-      alert(response);
+      // alert(response);
       if (response == "blocked")
         alert("You are Blocked from Good Area!");
       else if (response == "failed")
@@ -31,7 +49,7 @@ function postUser(uid, uname, photo, uemail)
   });
 }
 
-function postVote(baseurl, report, up)
+function postVote(report, up)
 {
   var votes = 'VOTESHOAX';
   if (up) votes = 'VOTESNOT';
@@ -75,8 +93,11 @@ function signOut()
   FB.getLoginStatus(function(response) {
     if (response.status === 'connected') {
       FB.logout(function(response) {
-        $.get("user/logout", function(data, status){
-          window.location = "http://localhost/benangkusut/";
+        $.get("user/logout", function(data, status) {
+          setTimeout(function(){
+              location.reload();
+          }, 200);
+          // window.location = "http://158.140.171.145";
         });
       });
     }
@@ -85,9 +106,12 @@ function signOut()
       auth2.signOut().then(function () {
         $.get("user/logout", function(data, status){
           auth2.disconnect();
-          alert(data);
-          alert(status);
-          window.location = "http://localhost/benangkusut/";
+          setTimeout(function(){
+              location.reload();
+          }, 200);
+          // alert(data);
+          // alert(status);
+          // window.location = "http://158.140.171.145";
         });
   });
 }

@@ -9,7 +9,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-1 col-xs-3 col-sm-2 logo "></div>
-                        <div class="col-lg-8 col-xs-9 col-sm-5 ">Copyrights 2017, websitename.com</div>
+                        <div class="col-lg-8 col-xs-9 col-sm-5 ">Copyrights 2017, besut.info</div>
                         <div class="col-lg-3 col-xs-12 col-sm-5 sociconcent">
                             <ul class="socialicons">
                                 <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
@@ -35,7 +35,7 @@
 
         <script src="https://apis.google.com/js/api.js"></script>
         <script src="<?=$baseurl?>assets/js/bootstrap.min.js"></script>
-        <script src="<?=$baseurl?>assets/scripts/APIs/facebookAPI.js"></script>
+        <script src="<?=$baseurl?>assets/scripts/APIs/facebookStatus.js"></script>
         <script src="<?=$baseurl?>assets/scripts/APIs/googleAPI.js"></script>
         <!-- END REVOLUTION SLIDER -->
     </body>

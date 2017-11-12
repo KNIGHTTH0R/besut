@@ -3,21 +3,30 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-8 col-xs-12 col-md-8" style="margin-left: auto; margin-right: auto; float: none;">
-                            <div class="pull-left"><a href="<?=$now-1>0?$baseurl . 'home/page' . $now-1:'#'?>" class="prevnext"><i class="fa fa-angle-left"></i></a></div>
+                            <div class="pull-left"><a href="<?=$now-1>0?$baseurl . 'home/page/' . ($now-1):'#'?>" class="prevnext"><i class="fa fa-angle-left"></i></a></div>
                             <div class="pull-left">
                                 <ul class="paginationforum">
                                   <?php
                                   $current = $now?$now:1;
-                                  for ($i = $current; $i <= $links; $i++) {
-                                    echo '<li><a href="' . $baseurl . 'home/page/' . $i . '"';
+                                  $first = 1;
+                                  if ($now - 5 > 0 && $now != $links)
+                                    $first = $current-5;
+                                  $ctr = 0;
+                                  $control = 'home';
+                                  if (isset($search))
+                                    $control = 'search';
+                                  for ($i = $first; $i <= $links; $i++) {
+                                    echo '<li style="margin-bottom: 10px;"><a href="' . $baseurl . $control . '/page/' . $i . '"';
                                     if ($i==$current)
-                                      echo ' class="active">';
-
+                                      echo ' class="active"';
+                                    echo '>';
                                     echo $i . "</a></li>";
+                                    $ctr++;
+                                    if ($ctr == 10) break;
                                   } ?>
                                 </ul>
                             </div>
-                            <div class="pull-right"><a href="<?= $now==$links? $baseurl . 'home/page/' . $links:'#'?>" class="prevnext last"><i class="fa fa-angle-right"></i></a></div>
+                            <div class="pull-right"><a style="margin-left: 10px;" href="<?= $now<$links? $baseurl . 'home/page/' . $links:'#'?>" class="prevnext last"><i class="fa fa-angle-right"></i></a></div>
                             <div class="clearfix"></div>
                         </div>
                     </div>
@@ -54,11 +63,10 @@
                                             <?=$posts[$i]->ctr?>
                                             <div class="mark"></div>
                                         </div>
-
                                     </div>
-                                    <div style="margin: 5px 0px; color: #db7a7a; border-bottom: solid 1px #f1f1f1;"><i class="fa fa-thumbs-o-down"></i> <?=$posts[$i]->vhoax?> Hoax Vote</div>
-                                    <div style="margin: 5px 0px; color: #1abc9c; border-bottom: solid 1px #f1f1f1;"><i class="fa fa-thumbs-o-up"></i> <?=$posts[$i]->vnot?> Not Hoax Vote</div>
-                                    <div style="margin: 5px 0px;"><i class="fa fa-eye"></i> Bot Estimation <?=$posts[$i]->estimation?>% Hoax</div>
+                                    <div class="bottom-info" style="color: #db7a7a;"><i class="fa fa-thumbs-o-down"></i> <?=$posts[$i]->vhoax?> Hoax Vote</div>
+                                    <div class="bottom-info" style="color: #1abc9c;"><i class="fa fa-thumbs-o-up"></i> <?=$posts[$i]->vnot?> Not Hoax Vote</div>
+                                    <div class="bottom-info" style="border-bottom: none;"><i class="fa fa-eye"></i> BOT: <?=$posts[$i]->estimation==1?'HOAX':'NOT HOAX'?></div>
                                 </div>
                                 <div class="clearfix"></div>
                             </div><!-- POST -->
@@ -73,21 +81,27 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-8 col-xs-12 col-md-8" style="margin-left: auto; margin-right: auto; float: none;">
-                          <div class="pull-left"><a href="<?=$now-1>0?$baseurl . 'home/page' . $now-1:'#'?>" class="prevnext"><i class="fa fa-angle-left"></i></a></div>
+                          <div class="pull-left"><a href="<?=$now-1>0?$baseurl . 'home/page/' . ($now-1):'#'?>" class="prevnext"><i class="fa fa-angle-left"></i></a></div>
                           <div class="pull-left">
                               <ul class="paginationforum">
                                 <?php
                                 $current = $now?$now:1;
-                                for ($i = $current; $i <= $links; $i++) {
-                                  echo '<li><a href="' . $baseurl . 'home/page/' . $i . '"';
+                                $first = 1;
+                                if ($now - 5 > 0 && $now != $links)
+                                  $first = $current-5;
+                                $ctr = 0;
+                                for ($i = $first; $i <= $links; $i++) {
+                                  echo '<li style="margin-bottom: 10px;"><a href="' . $baseurl . 'home/page/' . $i . '"';
                                   if ($i==$current)
-                                    echo ' class="active">';
-
+                                    echo ' class="active"';
+                                  echo '>';
                                   echo $i . "</a></li>";
+                                  $ctr++;
+                                  if ($ctr == 10) break;
                                 } ?>
                               </ul>
                           </div>
-                          <div class="pull-right"><a href="<?= $now==$links? $baseurl . 'home/page/' . $links:'#'?>" class="prevnext last"><i class="fa fa-angle-right"></i></a></div>
+                          <div class="pull-right"><a style="margin-left: 10px;" href="<?= $now<$links? $baseurl . 'home/page/' . $links:'#'?>" class="prevnext last"><i class="fa fa-angle-right"></i></a></div>
                           <div class="clearfix"></div>
                         </div>
                     </div>

@@ -10,7 +10,7 @@
 
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-8 col-md-8" style="width: auto;">
+                        <div class="col-lg-8 col-md-8" style="width: 100%;">
 
                             <!-- POST -->
                             <div class="post beforepagination" style="margin-bottom: 20px;">
@@ -22,8 +22,8 @@
                                     </div>
                                 <div class="topwrap">
                                     <div class="userinfo pull-left">
-                                      Bot Hoax Estimation
-                                      <h3 style="margin-top: 5px;"><?=$estimation?>%</h3><br>
+                                      Bot:
+                                      <h3 style="margin-top: 5px;"><?=$estimation==1?'HOAX':'NOT HOAX'?></h3><br>
                                         <div style="float: left; margin-right: 5px; background: url(<?=$baseurl?>assets/images/radio.jpg) <?=$closed?'-31px':'0px'?> 0 no-repeat; width: 31px; height: 31px;">
                                         </div>
                                         <div style="float:left; margin-top: -3px; width: 70px;">
@@ -35,7 +35,7 @@
                                         <h2><?=$title?></h2>
                                         <?php if ($link != '' || $pics != ''): ?>
                                         <blockquote>
-                                            <span class="original">Link: <a href=<?=$link?>><?=$link?></a></span>
+                                            <span class="original">Link: <a style="word-wrap: break-word;" href=<?=$link?>><?=$link?></a></span>
                                             <span class="original">Pictures: </span>
                                             <?php
                                               $picture = explode('~',$pics);
@@ -53,14 +53,18 @@
                                 </div>
                                 <div class="postinfobot">
                                     <div class="likeblock pull-left" style="width: auto; margin-right: 15px;">
-                                        <a href="#" class="up" onclick='postVote(<?='"' . $baseurl . '",' . $idreport?>, true)'><i class="fa fa-thumbs-o-up" title="Vote Hoax"></i><span id='ctrnot'><?= $vnot ?> Vote not Hoax</span></a>
-                                        <a href="#" class="down" onclick='postVote(<?='"' . $baseurl . '",' . $idreport?>, false)'><i class="fa fa-thumbs-o-down" title="Vote Hoax"></i><span id='ctrhoax'><?= $vhoax ?> Vote HOAX</span></a>
+                                        <a href="#" class="up" onclick='postVote(<?=$idreport?>, true)'><i class="fa fa-thumbs-o-up" title="Vote Hoax"></i><span id='ctrnot'><?= $vnot ?> Vote not Hoax</span></a>
+                                        <a href="#" class="down" onclick='postVote(<?=$idreport?>, false)'><i class="fa fa-thumbs-o-down" title="Vote Hoax"></i><span id='ctrhoax'><?= $vhoax ?> Vote HOAX</span></a>
                                     </div>
 
                                     <div class="posted pull-left"><i class="fa fa-clock-o"></i> Reported on : <?= date("H:i:s d F Y", strtotime($dtm)) ?></div>
                                     <div class="next pull-right"><a href="#"><i class="fa fa-share"></i></a></div>
                                     <div class="clearfix"></div>
                                 </div>
+                                <?php
+                                  if ($focuson != '')
+                                  echo "<script>window.location.hash = '#" . $focuson ."'</script>";
+                                ?>
                             </div><!-- POST -->
 
                             <!-- <div class="paginationf">

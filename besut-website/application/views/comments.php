@@ -73,12 +73,12 @@
 <div class="post">
     <form action="return false" class="form" method="post" id='child_parent'>
         <div class="topwrap">
-            <div class="userinfo pull-left" style="width: 10%;">
+            <div class="userinfo pull-left">
                 <div class="avatar">
                     <img src="<?=$baseurl?>data/pictures/profile/<?=$photo?>" alt="" />
                 </div>
             </div>
-            <div class="posttext pull-left" style="width: 90%;">
+            <div class="posttext pull-left">
                 <div class="textwraper">
                     <div class="postreply">Post a Reply</div>
                     <textarea style="resize: vertical; color: black;" name="reply" id="reply" placeholder="Type your message here"></textarea>

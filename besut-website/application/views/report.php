@@ -30,9 +30,8 @@
                                             </div>
                                             <div class="row newtopcheckbox">
                                                 <div class="col-lg-6 col-md-6">
-                                                    <div><p>Have any picture? Upload it!</p></div>
-                                                    <div>
-                                                      <?= form_upload('photos[]','','multiple class="btn btn-primary" style="width: auto; height: auto;"') ?>
+                                                    <div><p>Have any picture? Upload it!</p>
+                                                      <?= form_upload('photos[]','','multiple class="btn btn-primary" style="width: 100%; height: auto;"') ?>
                                                     </div>
                                                 </div>
                                                 <!-- <div class="col-lg-6 col-md-6">

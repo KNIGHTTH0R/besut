@@ -22,7 +22,8 @@ class Data_user extends CI_Model{
     'ULOCATION' => $ulocation,
     'URATE' => 0,
     'REGISTRATION_DATE' => $date,
-    'ACTIVE_STATUS' => true];
+    'ACTIVE_STATUS' => true,
+		`NOTIFICATION` => true];
 		$this->db->insert('users', $data);
     if ($this->db->affected_rows() > 0)
       return $userkey;
@@ -46,10 +47,10 @@ class Data_user extends CI_Model{
 
   //checking user for key saved in cookies
   function checkKeySession($userkey) {
-		$query = $this->db->query("SELECT ACTIVE_STATUS FROM USERS WHERE USERKEY = '$userkey' AND ACTIVE_STATUS = true");
+		$query = $this->db->query("SELECT `IDUSER` FROM USERS WHERE USERKEY = '$userkey' AND ACTIVE_STATUS = true");
 
 		if ($this->db->affected_rows() > 0)
-			return true;
+			return $query->row()->IDUSER;
 
 		return false;
   }
@@ -67,9 +68,4 @@ class Data_user extends CI_Model{
     $query = $this->db->select('IDROLE, UNAME, PROFILE_PIC, UEMAIL, URATE, REGISTRATION_DATE')->from('users')->get();
 		return $query->result();
   }
-
-	function getIndexUser($userkey) {
-		$query = $this->db->query("SELECT IDUSER FROM USERS WHERE USERKEY = '$userkey'");
-		return $query->row()->IDUSER;
-	}
 }
