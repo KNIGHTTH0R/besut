@@ -103,7 +103,7 @@ class Words_processing extends CI_Model{
 	function setBotEstimation($indexReport, $estimation)
 	{
 		$estimation = $estimation=='HOAX'?'true':'false';
-		$this->db->query("UPDATE `post_reports` SET `BOT_ESTIMATION` = $estimation WHERE idword = $index");
+		$this->db->query("UPDATE `post_reports` SET `BOT_ESTIMATION` = $estimation WHERE `IDREPORT` = $indexReport");
 		if ($this->db->affected_rows() > 0) return true;
 		return false;
 	}

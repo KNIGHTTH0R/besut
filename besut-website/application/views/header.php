@@ -65,9 +65,7 @@
                         </div>
                         <div class="col-lg-4 col-xs-12 col-sm-5 col-md-4 avt">
                             <div class="stnt pull-left">
-                                <form action="<?=$baseurl?>report" method="post" class="form">
-                                    <button class="btn btn-primary" type='submit'>Create Report</button>
-                                </form>
+                              <a href='<?=$baseurl?>report' class="btn btn-primary">Create Report</a>
                             </div>
 
                             <div class="env pull-left dropdown">

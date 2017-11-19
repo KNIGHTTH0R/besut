@@ -1,5 +1,10 @@
 RewriteEngine on
+
+RewriteBase /
+RewriteCond %{HTTP_HOST} ^besut.info [NC]
+RewriteRule ^(.*)$ http://www.besut.info/$1 [L,R=301]
+
 RewriteCond $1 !^(index\.php|resources|robots\.txt)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php/$1 [L,QSA] 
+RewriteRule ^(.*)$ index.php/$1 [L,QSA]

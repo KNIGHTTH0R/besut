@@ -26,7 +26,7 @@ chrome.runtime.onInstalled.addListener(function() {
 
 function requestData()
 {
-	$.get("http://localhost/benangkusut/requests/blockedsites", function(data, status){
+	$.get("http://www.besut.info/requests/blockedsites", function(data, status){
 		if (status == "success") {
 			setArrayInLocalStorage('sites', data);
 		}

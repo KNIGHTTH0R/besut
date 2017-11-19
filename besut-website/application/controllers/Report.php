@@ -10,7 +10,8 @@ class Report extends Handler_Core {
 		$this->load->helper('file');
     $this->load->model('data_report');
 		$this->data['notif'] = $this->data_report->getNotif($this->session->userdata('regUserID'));
-		$this->load->view('header', $this->data);
+		if ($this->router->fetch_method() != 'calculating')
+			$this->load->view('header', $this->data);
 	}
 
 	public function index()
@@ -89,9 +90,6 @@ class Report extends Handler_Core {
       $link = $this->input->post('link');
       $web = $this->input->post('web');
       $desc = $this->input->post('desc');
-      $facebook = $this->input->post('share_facebook');
-      $twitter = $this->input->post('share_twitter');
-      $google = $this->input->post('share_google');
 
       $filesCount = count($_FILES['photos']['name']);
 			echo $_FILES['photos']['size'][0];
@@ -123,8 +121,10 @@ class Report extends Handler_Core {
 
       if(!empty($uploadData) || $_FILES['photos']['name'][0] == "") {
         $status = $this->data_report->newReport($user, $title, $link, $web, $desc, $uploadData);
-        echo $status;
-        if ($status && $this->estimating($status)) {
+        if ($status) {
+					$this->estimating($status);
+					echo base_url();
+					echo "ASD";
           redirect(base_url() . 'report/view/' . $status);
         }
         else
@@ -135,7 +135,7 @@ class Report extends Handler_Core {
 
 	function calculating()
 	{
-
+		$reportIndex = $this->uri->segment(3);
 		$this->load->model('words_processing');
 
 		// NAIVE BAYES
@@ -148,8 +148,13 @@ class Report extends Handler_Core {
 		$pPositive = $positiveDocs/$totalDocs;
 		$pNegative = $negativeDocs/$totalDocs;
 
-		$doc = $this->data_report->getDataReport(96);
+		$doc = $this->data_report->getDataReport($reportIndex);
 		$content = $this->cleanString($doc->WEBCONTENT);
+		echo "value: ";
+		if($doc->HOAXVAL)
+			echo "HOAX";
+		else
+			echo "NOT HOAX";
 		$words = explode(' ',$content);
 		$existedWords = $this->words_processing->getValueOfWords($words);
 
@@ -164,10 +169,10 @@ class Report extends Handler_Core {
 		foreach ($existedWords as $word) {
 			$pWord = pow((($word->positive + 1) / $nPlusVocabPositive), $counts[$word->dword]) * 1000000;
 			$nWord = pow((($word->negative + 1) / $nPlusVocabNegative), $counts[$word->dword]) * 1000000;
-			echo $word->dword . ' positive = ' . $pWord . ' negative = ' . $nWord . "<br>";
+			// echo $word->dword . ' positive = ' . $pWord . ' negative = ' . $nWord . "<br>";
 			$vPositive = $vPositive * $pWord;
 			$vNegative = $vNegative * $nWord;
-			echo "vPositive: " . $vPositive . " vNegative: " . $vNegative . "<br><br>";
+			// echo "vPositive: " . $vPositive . " vNegative: " . $vNegative . "<br><br>";
 		}
 
 		// END OF NAIVE BAYES
@@ -220,7 +225,7 @@ class Report extends Handler_Core {
 		$estimation = $vPositive > $vNegative? "HOAX" : " BUKAN HOAX";
 		//echo $estimation;
 
-		return $this->words_processing->setBotEstimation($indexReport, $estimation);
+		$this->words_processing->setBotEstimation($index, $estimation);
 	}
 
 

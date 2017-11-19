@@ -44,7 +44,7 @@ function postUser(uid, uname, photo, uemail)
       console.log(e);
       console.log(a);
       console.log(z);
-      alert("something is wrong, try again!");
+      // alert("something is wrong, try again!");
       location.reload();
     }
   });
@@ -119,7 +119,7 @@ $(document).ready(function () {
           $.get("user/logout", function(data, status) {
             setTimeout(function(){
                 location.reload();
-            }, 200);
+            }, 100);
             // window.location = "http://158.140.171.145";
           });
         });
@@ -132,7 +132,7 @@ $(document).ready(function () {
             auth2.disconnect();
             setTimeout(function(){
                 location.reload();
-            }, 200);
+            }, 100);
             // alert(data);
             // alert(status);
             // window.location = "http://158.140.171.145";

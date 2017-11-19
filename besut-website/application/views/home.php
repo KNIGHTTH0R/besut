@@ -66,7 +66,13 @@
                                     </div>
                                     <div class="bottom-info" style="color: #db7a7a;"><i class="fa fa-thumbs-o-down"></i> <?=$posts[$i]->vhoax?> Hoax Vote</div>
                                     <div class="bottom-info" style="color: #1abc9c;"><i class="fa fa-thumbs-o-up"></i> <?=$posts[$i]->vnot?> Not Hoax Vote</div>
-                                    <div class="bottom-info" style="border-bottom: none;"><i class="fa fa-eye"></i> BOT: <?=$posts[$i]->estimation==1?'HOAX':'NOT HOAX'?></div>
+                                    <div class="bottom-info" style="border-bottom: none;"><i class="fa fa-eye"></i> BOT:
+                                      <?php
+                                        if ($posts[$i]->ctrweb > 0)
+                                          echo $posts[$i]->estimation==1?'HOAX':'NOT HOAX';
+                                        else
+                                          echo "undefined";
+                                      ?></div>
                                 </div>
                                 <div class="clearfix"></div>
                             </div><!-- POST -->

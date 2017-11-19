@@ -98,13 +98,13 @@ class Bot extends Handler_Core {
 		$finalPositive = array();
 		$finalNegative = array();
 
-    $docs = $this->words_processing->getDocs('true', 'false', null);
+    $docs = $this->words_processing->getDocs('true', 'true', null);
 		// $cnt = 0;
     foreach ($docs as $doc) {
 			$cleanWords = '';
 				$cleanWords = explode(' ', $this->cleanString($doc->WEBCONTENT));
-				echo $doc->IDREPORT;
-				echo '<br>';
+				// echo $doc->IDREPORT;
+				// echo '<br>';
 
       foreach ($cleanWords as $word) {
 				if ($word != '')
@@ -139,11 +139,11 @@ class Bot extends Handler_Core {
 			// if($cnt == 75) break;
 			// else $cnt++;
     }
-		echo sizeof($finalWord);
-		echo "<pre>";
-		var_dump($finalWord);
-		echo "</pre>";
-		echo sizeof($finalWord);
+		// echo sizeof($finalWord);
+		// echo "<pre>";
+		// var_dump($finalWord);
+		// echo "</pre>";
+		// echo sizeof($finalWord);
 
 		$whereDoc = "";
 		$countDoc = "";
@@ -163,5 +163,7 @@ class Bot extends Handler_Core {
 			$whereDoc = "";
 			$countDoc = "";
 		}
+		
+		echo "done";
   }
 }

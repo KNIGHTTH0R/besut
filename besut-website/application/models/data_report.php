@@ -43,7 +43,7 @@ class Data_report extends CI_Model{
     'RPICTURES' => $pictures,
     'PDATE_TIME' => $date,
     'BOT_ESTIMATION' => 0,
-		`VIEWABLE` => true];
+		'VIEWABLE' => true];
 		$this->db->insert('post_reports', $data);
     if ($this->db->affected_rows() > 0) {
       return $this->db->insert_id();
@@ -64,6 +64,7 @@ class Data_report extends CI_Model{
           R.`RPICTURES` as pics,
           R.`PDATE_TIME` as dtm,
           R.`BOT_ESTIMATION` as estimation,
+					R.`HOAXVAL` as HOAXVAL,
           R.`VOTESHOAX` as vhoax,
           R.`VOTESNOT` as vnot,
           R.`CLOSED` as closed,
@@ -82,6 +83,7 @@ class Data_report extends CI_Model{
           U.`PROFILE_PIC` as profile,
           R.`TITLE` as title,
           R.`RDESC` as content,
+					LENGTH(R.`WEBCONTENT`) as ctrweb,
           R.`BOT_ESTIMATION` as estimation,
           R.`VOTESHOAX` as vhoax,
           R.`VOTESNOT` as vnot,

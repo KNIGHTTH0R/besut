@@ -23,7 +23,13 @@
                                 <div class="topwrap">
                                     <div class="userinfo pull-left">
                                       Bot:
-                                      <h3 style="margin-top: 5px;"><?=$estimation==1?'HOAX':'NOT HOAX'?></h3><br>
+                                      <h3 style="margin-top: 5px;">
+                                      <?php
+                                        if (strlen($WEBCONTENT) > 0)
+                                          echo $estimation==1?'HOAX':'NOT HOAX';
+                                        else
+                                          echo "undefined";
+                                      ?></h3><br>
                                         <div style="float: left; margin-right: 5px; background: url(<?=$baseurl?>assets/images/radio.jpg) <?=$closed?'-31px':'0px'?> 0 no-repeat; width: 31px; height: 31px;">
                                         </div>
                                         <div style="float:left; margin-top: -3px; width: 70px;">

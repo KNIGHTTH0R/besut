@@ -25,7 +25,7 @@
                                                 <input type="text" id="link" name="link" placeholder="Enter Link (optional)" class="form-control" />
                                             </div>
                                             <div>
-                                                <textarea name="web" id="web" style="display: none; resize: none; height: 265px;" placeholder="Please Copy Paste The Article From The Website"  class="form-control" ></textarea>
+                                                <textarea name="web" id="web" style="display: none; resize: none; height: 265px;" placeholder="Please Copy Paste The Article From The Website, so the bot can calculate which the Article is Hoax or not"  class="form-control" ></textarea>
                                                 <textarea name="desc" id="desc" style="resize: vertical; height: 365px;" placeholder="Explanation"  class="form-control" ></textarea>
                                             </div>
                                             <div class="row newtopcheckbox">
